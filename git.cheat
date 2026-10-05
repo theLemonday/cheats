@@ -1,0 +1,9 @@
+% git
+
+# Change directory to git root
+cd "$(git rev-parse --show-toplevel)"
+
+# Change to a top-level directory of the repository
+cd "$(git rev-parse --show-toplevel)/<dir>"
+
+$ dir: git ls-tree -d --name-only HEAD
