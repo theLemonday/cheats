@@ -1,0 +1,14 @@
+% files, markdown, dump
+
+# Concatenate files into Markdown code blocks with relative paths (via fd & bat)
+fd --type f --base-directory "<target_folder>" --exec-batch sh -c ' \
+for file in "$@"; do \
+    name="${file##*/}"; \
+    ext="${name##*.}"; \
+    [ "$ext" = "$name" ] && ext="text"; \
+    printf "\`\`\`%s\n# %s\n" "$ext" "$file"; \
+    bat --style=plain --color=never --paging=never "$file"; \
+    printf "\n\`\`\`\n\n"; \
+done' sh
+
+$ target_folder: fd --type d --max-depth 3 2>/dev/null --- --header "Select a folder"
