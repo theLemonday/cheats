@@ -30,3 +30,9 @@ bash -ec '
 
 $ template: fd --max-depth 1 -t d . "$HOME/Documents/notes/templates" --exec basename
 
+% tmux, sandbox
+
+# Spin up a disposable tmux session in a fresh /tmp directory
+d=$(mktemp -d "/tmp/<name>.XXXXXX") && tmux new-session -d -s "<name>" -c "$d" && { [ -n "$TMUX" ] && tmux switch-client -t "<name>" || tmux attach -t "<name>"; }
+
+$ name: echo "sandbox-$(date +%m%d-%H%M)"
